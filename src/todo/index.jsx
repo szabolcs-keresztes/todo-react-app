@@ -5,6 +5,14 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux'; 
 
 import {
+    Button,
+    InputGroup,
+    InputGroupAddon,
+    InputGroupText,
+    Input
+} from "reactstrap";
+
+import {
     removeTodo,
     completeTodo,
 } from "./action-creators";
@@ -26,12 +34,25 @@ class Todo extends Component {
     render() {
         return (
             <div>
-                <p style={{textDecoration: this.props.todo.isCompleted ? "line-through": ""}} onClick={() => this.props.actions.completeTodo(this.props.todo.id, this.props.todo)}>
-                    {this.props.todo.name}
-                </p>
-                <button onClick={() => this.props.actions.removeTodo(this.props.todo.id)}>
-                    Remove
-                </button>
+                <InputGroup>
+                    <InputGroupAddon addonType="prepend">
+                        <InputGroupText>
+                            <Input 
+                                addon
+                                type="checkbox"
+                                checked={this.props.todo.isCompleted}
+                                onChange={() => this.props.actions.completeTodo(this.props.todo.id, this.props.todo)} />
+                        </InputGroupText>
+                    </InputGroupAddon>
+                    <InputGroupText style={{textDecoration: this.props.todo.isCompleted ? "line-through": ""}}>
+                        {this.props.todo.name}
+                    </InputGroupText>
+                    <InputGroupAddon addonType="prepend">
+                        <Button onClick={() => this.props.actions.removeTodo(this.props.todo.id)}>
+                            Remove
+                        </Button>
+                    </InputGroupAddon>
+                </InputGroup>
             </div>
         );
     }

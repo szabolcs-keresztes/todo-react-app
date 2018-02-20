@@ -6,7 +6,12 @@ import { connect } from 'react-redux';
 
 import get from 'lodash.get';
 
-import { Button } from 'react-bootstrap';
+import {
+    InputGroup,
+    Input,
+    InputGroupAddon,
+    Button
+} from 'reactstrap';
 
 import {
     createTodo,
@@ -26,17 +31,20 @@ class AddTodo extends Component {
     render() {
         return (
             <div>
-                <input 
-                    type='text'
-                    placeholder='New Task...'
-                    value={this.props.todoName}
-                    onChange={(e) => {
-                        this.props.actions.updateTodoName(e.target.value);
-                    }}
-                />
-                <Button onClick={() => this.props.actions.createTodo(this.props.todoName)}>
-                    Create
-                </Button>    
+                <InputGroup>
+                    <Input
+                        placeholder='New Task...'
+                        value={this.props.todoName}
+                        onChange={(e) => {
+                            this.props.actions.updateTodoName(e.target.value);
+                        }}
+                    />
+                    <InputGroupAddon addonType="prepend">
+                        <Button onClick={() => this.props.actions.createTodo(this.props.todoName)}>
+                            Create
+                        </Button>
+                    </InputGroupAddon>
+                </InputGroup>
             </div>
         );  
     }

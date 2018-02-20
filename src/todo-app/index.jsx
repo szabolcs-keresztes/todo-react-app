@@ -4,12 +4,15 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';  
 
+import {
+    Container,
+    Row,
+} from "reactstrap";
+
 import AddTodo from '../add-todo';
 import TodoList from '../todo-list';
 
 import { fetchTodos } from './action-creators';
-
-import './styles.css';
 
 class TodoApp extends Component {
 
@@ -34,16 +37,22 @@ class TodoApp extends Component {
 
     render() {
         return (
-        <div className="TodoApp">
+        <div>
+            <Container>
+                <Row>
+                    <header>
+                        <h1>To Do List</h1>
+                    </header>
+                </Row>
 
-            <header className="TodoApp-header">
-                <h1 className="TodoApp-title">To Do List</h1>
-            </header>
+                <Row>
+                    <AddTodo />
+                </Row>
 
-            <AddTodo />
-            
-            <TodoList todos={this.props.todos} />
-
+                <Row>
+                    <TodoList todos={this.props.todos} />
+                </Row>
+            </Container>
         </div>
         );
     }

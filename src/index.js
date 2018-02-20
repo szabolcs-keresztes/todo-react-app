@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import 'bootstrap/dist/css/bootstrap.css';
 import TodoApp from './todo-app';
 import registerServiceWorker from './registerServiceWorker';
 

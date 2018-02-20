@@ -88,12 +88,9 @@ export default (state = initialState, action) => {
         return {
             ...state,
             todos: state.todos.map(todo => {
-                if (todo.id === action.todoId) {
-                    return {
-                        id: todo.id,
-                        name: todo.name,
-                        isCompleted: true,
-                    };
+                if (todo.id === action.updatedTodo.id) {
+                    console.log();
+                    return action.updatedTodo;
                 }
                 return todo;
             }),

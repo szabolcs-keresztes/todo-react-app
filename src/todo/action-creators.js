@@ -43,10 +43,10 @@ export const completeTodoAttempt = todoId => {
     };
 }
 
-export const completeTodoSuccess = todoId => {
+export const completeTodoSuccess = updatedTodo => {
     return {
         type: actionTypes.COMPLETE_TODO_SUCCESS,
-        todoId,
+        updatedTodo,
     };
 }
 
@@ -60,13 +60,15 @@ export const completeTodoFailure = message => {
 export const completeTodo = (todoId, todo) => {
     return dispatch => {
         dispatch(completeTodoAttempt(todoId));
-        todoWebApi.put(todoId, {
+        const updatedTodo = {
             id: todo.id,
             name: todo.name,
-            isCompleted: true,
-        })
+            isCompleted: !todo.isCompleted,
+        };
+        console.log(updatedTodo.isCompleted);
+        todoWebApi.put(todoId, updatedTodo)
             .then(() => {
-                dispatch(completeTodoSuccess(todoId));
+                dispatch(completeTodoSuccess(updatedTodo));
             })
             .catch(message => {
                 dispatch(completeTodoFailure(message));
